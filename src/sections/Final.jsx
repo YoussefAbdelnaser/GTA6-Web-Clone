@@ -2,18 +2,32 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
-const PostCard = () => {
+const Final = () => {
   const videoRef = useRef(null);
 
   useGSAP(() => {
+    gsap.set(".final-content", { opacity: 0 });
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: ".final",
+        start: " top 80%",
+        end: "90% top",
+        scrub: true,
+        pin: true,
+      },
+    });
+
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: ".post-card",
-        start: "top center",
-        end: "bottom center",
+        trigger: ".final",
+        start: "top 80%",
+        end: "90% top",
         scrub: true,
       },
     });
+
+    tl.to(".final-content", { opacity: 1, duration: 1, scale: 1, ease: "power1.inOut" });
 
     videoRef.current.onloadedmetadata = () => {
       tl.to(
@@ -25,26 +39,19 @@ const PostCard = () => {
   });
 
   return (
-    <section className="post-card">
-      <div className="animated-gradient-bg" />
-
-      <div className="post-card-wrapper group hover:rotate-1 hover:-[1.02] transition duration-700">
-        <img src="/images/overlay.webp" alt="post card overlay" />
+    <section className="final">
+      <div className="final-content size-full">
         <video
           ref={videoRef}
           muted
           playsInline
-          autoPlay
           preload="auto"
-          src="/videos/postcard-vd.mp4"
+          src="/videos/output3.mp4"
+          className="size-full object-cover"
         />
-
-        <button className="group-hover bg-yellow transition duration-700">
-          Explore Leonida Keys
-        </button>
       </div>
     </section>
   );
 };
 
-export default PostCard;
+export default Final;
