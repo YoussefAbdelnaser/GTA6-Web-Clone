@@ -37,6 +37,7 @@ const PostCard = () => {
           autoPlay
           preload="auto"
           src="/videos/postcard-vd.mp4"
+          className="scale-115"
         />
 
         <button className="group-hover bg-yellow transition duration-700">
